@@ -30,13 +30,11 @@ class Instabot:
     def like(self):
         self.driver.implicitly_wait(10)
 
-        print("hi")
         self.posts = self.driver.find_elements_by_xpath("//article[contains(@class, '_8Rm4L')]")
         self.heart_sec = self.driver.find_elements_by_xpath("//span[contains(@class, 'fr66n')]")
         self.following_sec = self.driver.find_elements_by_xpath("//div[contains(@class, 'eleld')]")
 
         for ele in self.posts:
-            print("hello")
             self.heart=ele.find_element_by_class_name("eo2As").find_element_by_class_name("ltpMr").find_element_by_class_name("fr66n").find_element_by_tag_name("button")
             self.colour=self.heart.find_element_by_tag_name("svg").get_attribute("fill")
             self.username=ele.find_element_by_tag_name("header").find_element_by_class_name("o-MQd").find_element_by_class_name("RqtMr").find_element_by_class_name("e1e1d").find_element_by_tag_name("a").text
@@ -67,6 +65,8 @@ class Instabot:
         return False
 
 
-obj=Instabot("jj", "jj")
+username = input("Enter your username: ")
+password = input("Enter your passwore: ")
+obj=Instabot(username, password)
 obj.login()
 obj.like()
