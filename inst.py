@@ -10,6 +10,7 @@ class Instabot:
     def __init__(self, username, pw):
         self.username=username
         self.pw=pw
+        self.black = ["iiitbhopalmeme"]
         self.driver=webdriver.Firefox()
         self.driver.get("https://instagram.com")
         time.sleep(2)
@@ -29,16 +30,31 @@ class Instabot:
     def like(self):
         self.driver.implicitly_wait(10)
 
+        print("hi")
+        self.posts = self.driver.find_elements_by_xpath("//article[contains(@class, '_8Rm4L')]")
         self.heart_sec = self.driver.find_elements_by_xpath("//span[contains(@class, 'fr66n')]")
+        self.following_sec = self.driver.find_elements_by_xpath("//div[contains(@class, 'eleld')]")
 
-        for ele in self.heart_sec:
-            self.heart=ele.find_element_by_tag_name("button")
+        for ele in self.posts:
+            print("hello")
+            self.heart=ele.find_element_by_class_name("eo2As").find_element_by_class_name("ltpMr").find_element_by_class_name("fr66n").find_element_by_tag_name("button")
             self.colour=self.heart.find_element_by_tag_name("svg").get_attribute("fill")
+            self.username=ele.find_element_by_tag_name("header").find_element_by_class_name("o-MQd").find_element_by_class_name("RqtMr").find_element_by_class_name("e1e1d").find_element_by_tag_name("a").text
 
-            if self.colour == "#262626":
-                self.heart.click()
+            if self.blacklist(self.username):
+                continue
             else:
-                break
+                if self.colour == "#262626":
+                    self.heart.click()
+                else:
+                    break
+
+
+    def blacklist(self, username):
+        if username in self.black:
+            return True
+        else:
+            return False
 
 
 
@@ -51,6 +67,6 @@ class Instabot:
         return False
 
 
-obj=Instabot("prashant_0_9_", "helloworld")
+obj=Instabot("jj", "jj")
 obj.login()
 obj.like()
