@@ -15,10 +15,6 @@ class Instabot:
         time.sleep(2)
 
 
-        #while()
-        #time.sleep(1)
-
-
     def login(self):
         self.driver.implicitly_wait(10)
         self.driver.find_element_by_xpath("/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[2]/div/label/input").send_keys(self.username)
